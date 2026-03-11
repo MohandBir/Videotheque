@@ -1,0 +1,41 @@
+<?php 
+$title = 'CinéStream +' ;
+$cssLink = '../css/index-style.css';
+
+ob_start();
+?>
+<main>
+    <section class="movie-section">
+        <div class="categories-list">
+            <ul>
+                <li><button type='submit'>Tous les films</button></li>
+                <?php foreach ($genres as $genre) { ?>
+                <li><button type="submit"><?= htmlspecialchars($genre->getName()) ?></button></li>
+                <?php } ?>
+                <li><button type='submit'>👁️</button></li>
+                <li><button type='submit'>🕐</button></li>
+            </ul>
+        </div>
+        <div class="movies-card">
+            <?php foreach ($films as $film) {?>
+            <div class="movie-card">
+                <div class="image">
+                    <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?> ?>" alt="poster de filme">
+                </div>
+                <div class="down-card">
+                    <h3>titre</h3>
+                    <div class="bottom-card">
+                        <div class="span1"><span>📆 2026</span></div>
+                        <div class="span2"><span>🕐 <span></div>
+                    </div>
+
+                </div>
+            </div>
+            <?php } ?>
+        </div>
+    </section>
+</main>
+<?php
+$content = ob_get_clean();
+require('base.phtml');
+?>

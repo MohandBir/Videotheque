@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+:root {
+  --rougeCinema: #E94560;
+  --rougeFonce: #C73652;
+  --violetFonce: #10062ed2;
+  --noirAbsolu: #0D0D0D;
+  --noirCard: #1A1A1A;
+  --orTmdb: #F5C518;
+  --gris: #888888;
+}
+
+h1, h2, h3 {
+    font-family:'Arial Narrow Bold' , sans-serif ;
+}
+
+p  {
+    font-family: Arial, sans-serif;  
+}
