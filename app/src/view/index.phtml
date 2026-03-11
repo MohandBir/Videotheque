@@ -16,23 +16,30 @@ ob_start();
                 <li><button type='submit'>🕐</button></li>
             </ul>
         </div>
+        <?php if (isset($films)) {?>        
         <div class="movies-card">
             <?php foreach ($films as $film) {?>
             <div class="movie-card">
                 <div class="image">
-                    <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?> ?>" alt="poster de filme">
+                    <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="poster de filme">
                 </div>
                 <div class="down-card">
-                    <h3>titre</h3>
+                    <h3><?= htmlspecialchars($film->getTitle()) ?></h3>
                     <div class="bottom-card">
-                        <div class="span1"><span>📆 2026</span></div>
-                        <div class="span2"><span>🕐 <span></div>
+                        <div class="span1"><span>📆 <?= $film->getRelease_date() ?></span></div>
+                        <div class="span2"><span><?= ($film->getIsWatched())? '👁️' : '🕐' ?> <span></div>
                     </div>
 
                 </div>
             </div>
             <?php } ?>
         </div>
+        <?php }else {?>
+        <div class="invitation">
+            <p class="invitation-emoji">🚫</p>
+            <p> Votre vidéothèque est vide!, veuillez rajouter des films</p>
+        </div>
+        <?php } ?>
     </section>
 </main>
 <?php

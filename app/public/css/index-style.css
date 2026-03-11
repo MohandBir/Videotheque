@@ -72,6 +72,14 @@ h3 {
     color : var(--gris);
 }
 
+.invitation {
+    text-align: center;
+    margin-top: 20px;
+}
+.invitation p  {
+    font-size: 32px;
+}
+
 
 @media (min-width:480px) and (max-width:767px){
 
@@ -98,6 +106,7 @@ h3 {
     .movies-card {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         gap: 30px;
     }
     
