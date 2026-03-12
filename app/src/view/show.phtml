@@ -20,7 +20,7 @@ ob_start();
                     <div >
                         <div class="top-right-side"> 
                             <h1> <?= htmlspecialchars($film->getTitle()) ?></h1>
-                            <div class="top-right-side-link"><a href="">✏️</a> <a href="">❌</a></div>
+                            <div class="top-right-side-link"><a href="">✏️</a> <a href="?route=delete&id=<?= $film->getId() ?>" onclick=" return deleteConfirmation()">❌</a></div>
                         </div>
                         <div class="bottom-right-side">
                             <p>📆 <?= $film->getRelease_date() ?> | &nbsp;</p>
@@ -43,6 +43,12 @@ ob_start();
     </div>
     
 </main>
+
+<script>
+    function deleteConfirmation() {
+        return confirm('Etes-vous sûr de vouloir supprimer ce filme ?');
+    }
+</script>
 
 <?php
 $content = ob_get_clean();

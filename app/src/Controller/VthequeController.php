@@ -59,5 +59,13 @@ class VthequeController
 
       require __DIR__ . '/../View/show.phtml';
     }
+
+    public function delete()
+    {
+      $id = ($_GET['id']) ?? null;
+      $filmRepo = new FilmRepository;
+      $film = $filmRepo->delete($id);
+
+    }
       
 }

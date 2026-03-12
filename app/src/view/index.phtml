@@ -19,7 +19,7 @@ ob_start();
                 </ul>
             </form>     
         </div>
-        <?php if (isset($films)) {?>
+        <?php if (!empty($films)) {?>
             
             <div class="movies-card">
                 <?php foreach ($films as $film) {?>
