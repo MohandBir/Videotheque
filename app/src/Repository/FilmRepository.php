@@ -8,7 +8,7 @@ use PDO;
 
 class FilmRepository extends Repository
 {
-    public function findFilms()
+    public function findAll()
     {
         $sql = "SELECT * FROM film";
         $request = $this->pdo->prepare($sql);
@@ -17,4 +17,35 @@ class FilmRepository extends Repository
 
         return $films;
     }
+   
+    public function findAllByGenreId($genreId)
+    {
+        if ($genreId === null) {
+            $sql = "SELECT * FROM film Where genre_id is :genreId";
+            $request = $this->pdo->prepare($sql);
+            $request->execute(['genreId' => $genreId]);
+            $films = $request->fetchAll(PDO::FETCH_CLASS, Film::class);
+        } else {
+            $sql = "SELECT * FROM film Where genre_id=:genreId";
+            $request = $this->pdo->prepare($sql);
+            $request->execute(['genreId' => $genreId]);
+            $films = $request->fetchAll(PDO::FETCH_CLASS, Film::class);
+        }
+     
+
+        return $films;
+    }
+
+    public function findAllByIsWatched($isWatched)
+    {
+        $sql = "SELECT * FROM film Where isWatched=:isWatched";
+        $request = $this->pdo->prepare($sql);
+        $request->execute(['isWatched' => $isWatched]);
+        $films = $request->fetchAll(PDO::FETCH_CLASS, Film::class);
+
+        return $films;
+    }
+
+
+
 }

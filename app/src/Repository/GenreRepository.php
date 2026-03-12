@@ -7,7 +7,7 @@ use PDO;
 
 class GenreRepository extends Repository
 {
-    public function findGenres()
+    public function findAll()
     {
         $sql = "SELECT * FROM genre";
         $request = $this->pdo->prepare($sql);
@@ -16,4 +16,7 @@ class GenreRepository extends Repository
 
         return $genres;
     }
+
+
+
 }

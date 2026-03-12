@@ -17,4 +17,6 @@ $vtheque = new VthequeController();
 
 if ($route === 'index') {
     $vtheque->index();
+} elseif ($route === 'sort') {
+    $vtheque->sort();
 }

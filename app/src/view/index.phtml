@@ -7,21 +7,29 @@ ob_start();
 <main>
     <section class="movie-section">
         <div class="categories-list">
-            <ul>
-                <li><button type='submit'>Tous les films</button></li>
-                <?php foreach ($genres as $genre) { ?>
-                <li><button type="submit"><?= htmlspecialchars($genre->getName()) ?></button></li>
-                <?php } ?>
-                <li><button type='submit'>👁️</button></li>
-                <li><button type='submit'>🕐</button></li>
-            </ul>
+            <form action="?route=sort" method="post">
+                <ul>
+                    <li><button type='submit' name="all" value="all">Tous les films</button></li>
+                    <?php foreach ($genres as $genre) { ?>
+                    <li><button type="submit" name="genre" value="<?= $genre->getId() ?>"><?= htmlspecialchars($genre->getName()) ?></button></li>
+                    <?php } ?>
+                    <li><button type='submit' name="genre" value="">n/c</button></li>
+                    <li><button type='submit' name="sort" value="1">👁️</button></li>
+                    <li><button type='submit' name="sort" value="0">🕐</button></li>
+                </ul>
+            </form>
+            
         </div>
         <?php if (isset($films)) {?>        
         <div class="movies-card">
             <?php foreach ($films as $film) {?>
             <div class="movie-card">
-                <div class="image">
-                    <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="poster de filme">
+                <div class="poster-img">
+                    <?php if ($film->getPoster_path()) { ?>
+                    <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="Poster film">
+                    <?php } else { ?>
+                    <div class="empty-path"><span >🎥</span></div>
+                    <?php } ?>
                 </div>
                 <div class="down-card">
                     <h3><?= htmlspecialchars($film->getTitle()) ?></h3>

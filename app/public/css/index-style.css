@@ -45,17 +45,24 @@ main {
 .movie-card {
     background-color: var(--noirCard);
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
 }
 .movie-card:hover{
     transform: translateY(-6px);
     box-shadow:0 10px 25px rgba(233,69,96,0.3);
 }
-img {
+img, .empty-path {
     height: 270px;
     width: 180px;
     border-radius: 12px 12px 0 0;
 }
+ 
+.empty-path {
+    display: flex;
+    font-size: 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
 h3 {
     color: white;  
 }
