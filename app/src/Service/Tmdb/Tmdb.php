@@ -3,6 +3,7 @@
 namespace Cine\App\Service\Tmdb;
 
 class Tmdb
+
 {
     /** URL de base de l'API TMDB */
     const BASE_URL = "https://api.themoviedb.org/3";

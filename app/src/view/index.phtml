@@ -1,5 +1,5 @@
 <?php 
-$title = 'CinéStream +' ;
+$title = 'CinéStream +';
 $cssLink = '../css/index-style.css';
 
 ob_start();
@@ -14,39 +14,49 @@ ob_start();
                     <li><button type="submit" name="genre" value="<?= $genre->getId() ?>"><?= htmlspecialchars($genre->getName()) ?></button></li>
                     <?php } ?>
                     <li><button type='submit' name="genre" value="">n/c</button></li>
-                    <li><button type='submit' name="sort" value="1">👁️</button></li>
-                    <li><button type='submit' name="sort" value="0">🕐</button></li>
+                    <li><button type='submit' name="sortWatched" value="1">👁️</button></li>
+                    <li><button type='submit' name="sortWatched" value="0">🕐</button></li>
                 </ul>
-            </form>
+            </form>     
+        </div>
+        <?php if (isset($films)) {?>
             
-        </div>
-        <?php if (isset($films)) {?>        
-        <div class="movies-card">
-            <?php foreach ($films as $film) {?>
-            <div class="movie-card">
-                <div class="poster-img">
-                    <?php if ($film->getPoster_path()) { ?>
-                    <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="Poster film">
-                    <?php } else { ?>
-                    <div class="empty-path"><span >🎥</span></div>
-                    <?php } ?>
-                </div>
-                <div class="down-card">
-                    <h3><?= htmlspecialchars($film->getTitle()) ?></h3>
-                    <div class="bottom-card">
-                        <div class="span1"><span>📆 <?= $film->getRelease_date() ?></span></div>
-                        <div class="span2"><span><?= ($film->getIsWatched())? '👁️' : '🕐' ?> <span></div>
-                    </div>
+            <div class="movies-card">
+                <?php foreach ($films as $film) {?>
+                
+                <a href="?route=show&id=<?= $film->getId() ?>&genreId=<?= $film->getGenre_id() ?>" class="movie-link" >
+                    <div class="movie-card">
+                        <div class="poster-img">
+                            <?php if ($film->getPoster_path()) { ?>
+                            <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="Poster film">
+                            <?php } else { ?>
+                            <div class="empty-path"><span >🎥</span></div>
+                            <?php } ?>
+                        </div>
+                        <div class="down-card">
+                            <h3><?= htmlspecialchars($film->getTitle()) ?></h3>
+                            <div class="bottom-card">
+                                <div class="span1"><span>📆 <?= $film->getRelease_date() ?></span></div>
+                                <div class="span2"><span><?= ($film->getIsWatched())? '👁️' : '🕐' ?> <span></div>
+                            </div>
 
-                </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <?php } ?>
+                    <?php if (isset($message)) { ?>
+                        <div class="invitation"><p><?= $message ?></p></div>
+                    <?php }?>
             </div>
-            <?php } ?>
-        </div>
-        <?php }else {?>
-        <div class="invitation">
-            <p class="invitation-emoji">🚫</p>
-            <p> Votre vidéothèque est vide!, veuillez rajouter des films</p>
-        </div>
+
+        <?php } else {?>
+
+            <div class="invitation">
+                <p class="invitation-emoji">🚫</p>
+                <p> Votre collection est vide!</p>
+            </div>
+
         <?php } ?>
     </section>
 </main>

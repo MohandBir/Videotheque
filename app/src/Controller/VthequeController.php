@@ -4,6 +4,7 @@ namespace Cine\App\Controller;
 
 use Cine\App\Repository\FilmRepository;
 use Cine\App\Repository\GenreRepository;
+use Cine\App\Service\Tmdb\Tmdb;
 
 class VthequeController 
 {
@@ -11,9 +12,9 @@ class VthequeController
     {
       $genreRepo = new GenreRepository;
       $genres = $genreRepo->findAll();
-
-      $filmsRepo = new FilmRepository;
-      $films = $filmsRepo->findAll();
+ 
+      $filmRepo = new FilmRepository;
+      $films = $filmRepo->findAll();
       
       require __DIR__ . '/../View/index.phtml';
     }
@@ -26,19 +27,37 @@ class VthequeController
       }
       if (isset($_POST['genre'])) {       
         $genreId =($_POST['genre'] !== '') ? (int)$_POST['genre'] : NULL;
-        $filmsRepo = new FilmRepository;
-        $films = $filmsRepo->findAllByGenreId($genreId);
+        $filmRepo = new FilmRepository;
+        $films = $filmRepo->findAllByGenreId($genreId);
+        $message = (empty($films)) ? '🚫 Aucun film pour cette Categorie !':'';
       }   
-      if (isset($_POST['sort'])) {
-        $isWatched = (int)$_POST['sort'];
-        $filmsRepo = new FilmRepository;
-        $films = $filmsRepo->findAllByIsWatched($isWatched);
+      if (isset($_POST['sortWatched'])) {
+        $isWatched = (int)$_POST['sortWatched'];
+        $filmRepo = new FilmRepository;
+        $films = $filmRepo->findAllByIsWatched($isWatched);
       } 
    
       $genreRepo = new GenreRepository;
       $genres = $genreRepo->findAll();
 
       require __DIR__ . '/../View/index.phtml';
+    }
+
+    public function show() 
+    { 
+      $id = (int) (($_GET['id'])) ?? null;
+      if ($_GET['genreId'] !== '') {
+        $genreId = (int) $_GET['genreId'];
+        $genreRepo = new GenreRepository;
+        $genreShow = $genreRepo->findById($genreId)->getName();
+      } else {
+        $genreShow = 'n/c';
+      }
+
+      $filmRepo = new FilmRepository;
+      $film = $filmRepo->findById($id);
+
+      require __DIR__ . '/../View/show.phtml';
     }
       
 }

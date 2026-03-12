@@ -17,6 +17,17 @@ class FilmRepository extends Repository
 
         return $films;
     }
+
+    public function findById($id)
+    {
+        $sql = "SELECT * FROM film WHERE id=:id";
+        $request = $this->pdo->prepare($sql);
+        $request->execute(['id' => $id]);
+        $request->setFetchMode(PDO::FETCH_CLASS, Film::class);
+        $film = $request->fetch();
+
+        return $film;
+    }
    
     public function findAllByGenreId($genreId)
     {

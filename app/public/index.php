@@ -19,4 +19,6 @@ if ($route === 'index') {
     $vtheque->index();
 } elseif ($route === 'sort') {
     $vtheque->sort();
+} elseif ($route === 'show') {
+    $vtheque->show();
 }

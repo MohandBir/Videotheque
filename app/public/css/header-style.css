@@ -33,7 +33,7 @@ a:hover {
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:15px;
+    padding: 15px;
 }
 
 /* HAMBURGER */
@@ -108,7 +108,7 @@ a:hover {
     }
 
     nav a{
-        padding:10px 15px;
+        padding: 0 15px;
     }
 
 }
