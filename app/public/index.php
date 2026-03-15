@@ -23,4 +23,6 @@ if ($route === 'index') {
     $vtheque->show();
 } elseif ($route === 'delete') {
     $vtheque->delete();
+} elseif ($route === 'update') {
+    $vtheque->update();
 }

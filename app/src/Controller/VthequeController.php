@@ -2,6 +2,7 @@
 
 namespace Cine\App\Controller;
 
+use Cine\App\Entity\Film;
 use Cine\App\Repository\FilmRepository;
 use Cine\App\Repository\GenreRepository;
 use Cine\App\Service\Tmdb\Tmdb;
@@ -45,7 +46,7 @@ class VthequeController
 
     public function show() 
     { 
-      $id = (int) (($_GET['id'])) ?? null;
+      $id = (int) ($_GET['id']) ?? null;
       if ($_GET['genreId'] !== '') {
         $genreId = (int) $_GET['genreId'];
         $genreRepo = new GenreRepository;
@@ -67,5 +68,57 @@ class VthequeController
       $film = $filmRepo->delete($id);
 
     }
-      
+
+    public function update()
+    {
+      if (empty($_POST)) {
+        $id = (int) ($_GET['id']) ?? null;
+        $genreRepo = new GenreRepository;
+
+        if ($_GET['genreId'] !== '') {
+          $genreId = (int) $_GET['genreId'];
+          $genreShow = $genreRepo->findById($genreId)->getName();
+        } else {
+          $genreShow = 'n/c';
+        }
+        $genres = $genreRepo->findAll();
+
+        $filmRepo = new FilmRepository;
+        $film = $filmRepo->findById($id);  
+      }
+      if (!empty($_POST)) { 
+        require __DIR__ . '/../Service/function/fieldVerify.php';
+        $errors = fieldVerify($_POST['genreId'], $_POST['isWatched'], $_POST['description'] );
+        if ($errors) {
+          $id = (int) ($_POST['filmId']) ?? null;
+          $genreRepo = new GenreRepository;
+
+          if ($_POST['genreId'] !== '') {
+            $genreId = (int) $_POST['genreId'];
+            $genreShow = $genreRepo->findById($genreId)->getName();
+            } else {
+              $genreShow = 'n/c';
+            }
+          $genres = $genreRepo->findAll();
+
+          $filmRepo = new FilmRepository;
+          $film = $filmRepo->findById($id);
+        }
+        if (!($errors)) {
+          $filmEntity = new Film;
+          $film = $filmEntity->setId((int)$_POST['filmId'])
+          ->setGenre_id((int)$_POST['genreId'])
+          ->setIsWatched((int)$_POST['isWatched'])
+          ->setDescription($_POST['description'])
+          ;
+          $filmRepo = (new FilmRepository)->update($film);
+        } 
+        
+      }
+
+      require __DIR__ . '/../View/update.phtml';
+
+    }
+    
+
 }

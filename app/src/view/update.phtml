@@ -1,0 +1,102 @@
+<?php 
+$titleFilm = (isset($film)) ? $film->getTitle() : $_POST['title'];
+$title = 'Modifer ' . $titleFilm;
+$cssLink = '../css/update-style.css';
+
+ob_start();
+?>
+<main>
+    <div class="<?= (!empty($errors)) ? 'invitation' : 'hide' ?> ">
+        <?php if (!empty($errors)) { ?>
+            <?php foreach ($errors as $error) { ?>
+                <p><?= '⚠️ '.$error ?></p>
+            <?php } ?>
+        <?php } ?>      
+    </div>
+    <div class="section-wrap">
+        <section class="show-section">
+            <div class="movie-card">
+                <div class="img-film">
+                    <?php if ($film->getPoster_path()) { ?>
+                        <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="Poster film">
+                    <?php } else { ?>
+                        <div class="empty-path"><span >🎥</span></div>
+                    <?php } ?>            
+                </div>
+                <div class="movie-details">
+                    <div >
+                        <div class="top-right-side"> 
+                            <h1> <?= htmlspecialchars($film->getTitle()) ?></h1>
+                            <div class="top-right-side-link"><a href="">✏️</a> <a href="?route=delete&id=<?= $film->getId() ?>" onclick=" return deleteConfirmation()">❌</a></div>
+                        </div>
+                        <div class="bottom-right-side">
+                            <p>📆 <?= $film->getRelease_date() ?> | &nbsp;</p>
+                            <p> ⏱ <?= $film->getRuntime() ?> min | &nbsp;</p>
+                            <p> 🎭 <?= $genreShow  ?> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                            <p> <span><?= ($film->getIsWatched())? '👁️' : '🕐' ?></p>
+                        </div>
+
+                    </div>
+                    <div class="update">
+                        <form action="?route=update" method="post" id="updateForm">
+                            <div class="gender-and-sort-wrap">
+                                <div class="gender-list">
+                                    <select name="genreId">
+                                            <option value="">--Choisir un genre personnalisé--</option>
+                                            <option value="null">n/c</option>
+                                        <?php foreach ($genres as $genre) { ?>
+                                            <option value="<?= $genre->getId() ?>"><?= htmlspecialchars($genre->getName()) ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="hidden" name="filmId" value="<?= $film->getId() ?>">
+                                    <input type="hidden" name="title" value="<?= $film->getTitle() ?>">
+
+                                </div>
+                                <div class="sort-watched">
+                                    <label for="isWatched" id="radio-btn"> <input type="radio" name="isWatched" value="0" checked>🕐</label>
+                                    <label for="isWatched"> <input type="radio" name="isWatched" value="1">👁️</label>
+                                </div>
+                            </div>
+                            <div class="description">
+                                <textarea name="description" cols="20" rows="6" placeholder="Entrer un mot"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="synopsis">
+                <p><?= htmlspecialchars($film->getOverview()) ?></p>
+            </div>
+        </section>
+
+        <section>
+            <div class="categories-list">
+                <form action="" method="post">
+                    <ul>
+                        <li><button type='submit' form="updateForm" onclick=" return updateConfirmation() ">Enregistrer les modifications</button></li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+
+    
+</main>
+
+<script>
+    function deleteConfirmation() {
+        return confirm('Etes-vous sûr de vouloir supprimer ce filme ?');
+    }
+    function updateConfirmation() {
+        return confirm('Etes-vous sûr de vouloir modifier ce filme ?');
+    }
+</script>
+
+<?php
+$content = ob_get_clean();
+require('base.phtml');
+?>

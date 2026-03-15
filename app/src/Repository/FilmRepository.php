@@ -67,6 +67,24 @@ class FilmRepository extends Repository
         exit;
     }
 
+    public function update($film)
+    {
+        $sql = "UPDATE film SET genre_id=:genreId, isWatched=:isWatched, description=:description WHERE id=:id";
+        if ($film->getGenre_id() === 0) {
+            $film->setGenre_id(null);
+        } 
+        $request = $this->pdo->prepare($sql);
+        $request->execute([
+            'genreId' => $film->getGenre_id(),
+            'isWatched' => $film->getIsWatched(),
+            'description' => $film->getDescription(),
+            'id' => $film->getId(),
+            ]);
+
+        header('location: index.php?route=show&id='.$film->getId().'&genreId='.$film->getGenre_id().'&success=1');
+        exit;
+    }
+
 
 
 }
