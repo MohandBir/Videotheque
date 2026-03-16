@@ -8,7 +8,7 @@ ob_start();
     <section class="movie-section">
         <div class="search">
             <form action="?route=search" method="post">
-                <input type="text" name="word" placeholder="Rechercher un fim..." value="<?= ($word)?? '' ?>">
+                <input type="text" name="word" placeholder="Rechercher un film..." value="<?= ($word)?? '' ?>">
                 <button type="submit">🔍 Rechercher</button>
             </form>
         </div>
@@ -16,7 +16,7 @@ ob_start();
             
             <div class="movies-card">
                 <?php foreach ($films['results'] as $film) {?>
-                    <a href="?route=show&id=<?= $film['id'] ?>&genreId=<?= $film['genre_ids'][0] ?>" class="movie-link" >
+                    <a href="?route=showTmdb&id=<?= $film['id'] ?>&genreId=<?= $film['genre_ids'][0] ?>" class="movie-link" >
                         <div class="movie-card">
                             <div class="poster-img">
                                 <?php if ($film['backdrop_path']) { ?>

@@ -13,7 +13,7 @@
     border-radius: 20px;
     padding: 20px 15px 15px 20px ;
     justify-self: center;
-    min-height: 620px;
+    min-height: 520px;
 }
 
 .img-film {
@@ -32,6 +32,12 @@ img, .empty-path {
     justify-content: center;
 
 }
+
+.top-right-side h1{
+   font-size:x-large ;
+    padding-top: 7px;
+}
+
 .top-right-side-link {
     display: flex;
     flex-direction: row;
@@ -91,6 +97,26 @@ img, .empty-path {
     display: none;
 }
 
+.categories-list ul{
+    display:flex;
+    justify-self: center;
+    list-style:none;
+    padding: 20px;
+}
+
+.categories-list button {
+    border-radius: 30px;
+    border : solid 1.5px #E94560 ;
+    background-color: #0D0D0D;
+    color :#E94560;
+    padding: 8px;
+}
+
+.categories-list button:active, .categories-list button:hover {
+    background-color: #E94560;
+    color: white;
+}
+
 @media (min-width:480px) and (max-width:767px){
 
     .show-section {
@@ -110,6 +136,9 @@ img, .empty-path {
     .top-right-side-link {
         display: flex;
         flex-direction: row;
+    }
+    .bottom-right-side {
+        justify-self: start;
     }
     .movie-details {
         display: flex;
@@ -139,8 +168,11 @@ img, .empty-path {
         min-height: 500px;
     }
     .top-right-side {
-        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+        justify-content:center;
     }
+   
     .movie-details {
         display: flex;
         flex-direction: column;
@@ -152,6 +184,12 @@ img, .empty-path {
     .comment {
         /* min-height: 174px; */
         flex: 1;
+    }
+    .top-right-side {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 5px;
     }
     .top-right-side-link {
         display: flex;

@@ -29,4 +29,6 @@ if ($route === 'index') {
     $vtheque->update();
 } elseif ($route === 'search') {
    $tmdb->search();
+} elseif ($route === 'showTmdb') {
+   $tmdb->show();
 }

@@ -13,27 +13,33 @@ ob_start();
             <div class="movie-card">
                 <div class="img-film">
                     <?php if ($film->getPoster_path()) { ?>
-                    <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="Poster film">
+                        <img src="https://image.tmdb.org/t/p/w1280<?= $film->getPoster_path() ?>" alt="Poster film">
                     <?php } else { ?>
-                    <div class="empty-path"><span >🎥</span></div>
+                        <div class="empty-path"><span >🎥</span></div>
                     <?php } ?>            
                 </div>
                 <div class="movie-details">
                     <div >
                         <div class="top-right-side"> 
-                            <h1> <?= htmlspecialchars($film->getTitle()) ?></h1>
-                            <div class="top-right-side-link"><a href="?route=update&id=<?= $film->getId() ?>&genreId=<?= $film->getGenre_id() ?>">✏️</a> <a href="?route=delete&id=<?= $film->getId() ?>" onclick=" return deleteConfirmation()">❌</a></div>
+                            <div><h1> <?= htmlspecialchars($film->getTitle()) ?></h1></div>
+                            <div class="top-right-side-link"><a href="">➕</a></div>
                         </div>
                         <div class="bottom-right-side">
-                            <p>📆 <?= $film->getRelease_date() ?> | &nbsp;</p>
-                            <p> ⏱ <?= $film->getRuntime() ?> min | &nbsp;</p>
-                            <p> 🎭 <?= $genreShow  ?> |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                            <p> <span><?= ($film->getIsWatched())? '👁️' : '🕐' ?></p>
+                            <p>📆<?= substr(htmlspecialchars($film->getRelease_date()),0,4 )?>&nbsp;|&nbsp;</p>
+                            <p>⏱ <?= $film->getRuntime() ?> min | &nbsp;</p>
+                            <p> 🎭
+                                <?php $num = 0 ?>
+                                <?php foreach ($film->getGenres() as $genre) { ?>
+                                    <?php $num++ ?>
+                                    <?= ($num < count($film->getGenres())) ? $genre.', ' : $genre ?>
+                                <?php } ?> 
+
+                            </p>
+                        </div>
+                        <div class="bottom-right-side">
+                            <p> ⭐ <?= number_format($film->getVote_average(), 1).'/10 ('. number_format($film->getVote_count(),0,',',' ') . ' votes)' ?> </p>
                         </div>
 
-                    </div>
-                    <div class="comment">
-                        <p> <?= $film->getDescription() ?></p>
                     </div>
                 </div>
             </div>
@@ -53,13 +59,8 @@ ob_start();
     
 </main>
 
-<script>
-    function deleteConfirmation() {
-        return confirm('Etes-vous sûr de vouloir supprimer ce filme ?');
-    }
-</script>
 
 <?php
 $content = ob_get_clean();
-require('base.phtml');
+require(__DIR__.'/../base.phtml');
 ?>
