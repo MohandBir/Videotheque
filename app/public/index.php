@@ -1,7 +1,8 @@
 <?php
-namespace Cine\App\public;
+// namespace Cine\App\public;
 
 use Cine\App\Controller\VthequeController;
+use Cine\App\Controller\TmdbController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__.'/../.env.php';
@@ -13,6 +14,7 @@ if (isset($_GET['route'])) {
 }
  
 $vtheque = new VthequeController();
+$tmdb = new TmdbController();
 
 
 if ($route === 'index') {
@@ -25,4 +27,6 @@ if ($route === 'index') {
     $vtheque->delete();
 } elseif ($route === 'update') {
     $vtheque->update();
+} elseif ($route === 'search') {
+   $tmdb->search();
 }

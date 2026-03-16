@@ -1,0 +1,55 @@
+<?php 
+$title = 'Rechercher un film';
+$cssLink = '../css/index-style.css';
+
+ob_start();
+?>
+<main>
+    <section class="movie-section">
+        <div class="search">
+            <form action="?route=search" method="post">
+                <input type="text" name="word" placeholder="Rechercher un fim..." value="<?= ($word)?? '' ?>">
+                <button type="submit">🔍 Rechercher</button>
+            </form>
+        </div>
+        <?php if (!empty($films['results'])) {?>
+            
+            <div class="movies-card">
+                <?php foreach ($films['results'] as $film) {?>
+                    <a href="?route=show&id=<?= $film['id'] ?>&genreId=<?= $film['genre_ids'][0] ?>" class="movie-link" >
+                        <div class="movie-card">
+                            <div class="poster-img">
+                                <?php if ($film['backdrop_path']) { ?>
+                                <img src="https://image.tmdb.org/t/p/w1280<?= $film['backdrop_path'] ?>" alt="Poster film">
+                                <?php } else { ?>
+                                <div class="empty-path"><span >🎥</span></div>
+                                <?php } ?>
+                            </div>
+                            <div class="down-card">
+                                <h3><?php echo htmlspecialchars(substr($film['title'],0,16)); echo (mb_strlen($film['title'])>16) ? '...': ''; ?></h3>
+                                <div class="bottom-card">
+                                    <div class="span1"><span>📆 <?= htmlspecialchars(substr($film['release_date'],0,4)) ?></span></div>
+                                    <div class="span1"><span>➕</span></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                <?php } ?>
+
+            </div>
+
+        <?php } else {?>
+
+            <div class="invitation">
+                <p class="invitation-emoji">🚫</p>
+                <p> Aucun film correspond au titre inséré !</p>
+            </div>
+
+        <?php } ?>
+    </section>
+</main>
+<?php
+$content = ob_get_clean();
+require(__DIR__ .'/../base.phtml');
+?>

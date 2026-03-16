@@ -34,7 +34,7 @@ ob_start();
                             <?php } ?>
                         </div>
                         <div class="down-card">
-                            <h3><?= htmlspecialchars($film->getTitle()) ?></h3>
+                            <h3><?= htmlspecialchars(substr($film->getTitle(),0,18).'...') ?></h3>
                             <div class="bottom-card">
                                 <div class="span1"><span>📆 <?= $film->getRelease_date() ?></span></div>
                                 <div class="span2"><span><?= ($film->getIsWatched())? '👁️' : '🕐' ?> <span></div>
