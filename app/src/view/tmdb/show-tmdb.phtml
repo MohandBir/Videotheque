@@ -6,8 +6,9 @@ ob_start();
 ?>
 <main>
     <div class="<?= (isset($_GET['success'])) ? 'success' : 'hide' ?> ">
-        <p>Vos modification sont enregistrées avec succès</p>     
+        <p>Ce film est dèja Ajouté à la videothèque</p>    
     </div>
+    <?php unset($_GET['success']); ?> 
     <div class="section-wrap">
         <section class="show-section">
             <div class="movie-card">
@@ -22,7 +23,7 @@ ob_start();
                     <div >
                         <div class="top-right-side"> 
                             <div><h1> <?= htmlspecialchars($film->getTitle()) ?></h1></div>
-                            <div class="top-right-side-link"><a href="">➕</a></div>
+                            <div class="top-right-side-link"><a href="?route=add&id=<?= $film->getId() ?>">➕</a></div>
                         </div>
                         <div class="bottom-right-side">
                             <p>📆<?= substr(htmlspecialchars($film->getRelease_date()),0,4 )?>&nbsp;|&nbsp;</p>

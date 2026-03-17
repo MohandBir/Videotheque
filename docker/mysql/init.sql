@@ -23,12 +23,16 @@ INSERT INTO genre (name) VALUES
  ('Comédie'),
  ('Drame'),
  ('Horreur'),
- ('Fantastique');
+ ('Fantastique'),
+ ('Aventure'),
+ ('Science-Fiction')
+ ;
+ 
 INSERT INTO film (tmdb_id, title, poster_path, release_date, runtime, overview, genre_id,
 description, isWatched) VALUES
-(1265609,'War Machine','/rFhKkXhk7ClU03jQ5rHIApJDwev.jpg', 2026, 110, "Lors d'une
+(1265609,'War Machine','/rFhKkXhk7ClU03jQ5rHIApJDwev.jpg', 2026, 110, 'Lors d''une
 dernière mission éprouvante pendant sa formation de Ranger, un ingénieur militaire doit
-mener son unité contre une gigantesque machine à tuer venue d'un autre monde.",1, 'Un
+mener son unité contre une gigantesque machine à tuer venue d''un autre monde.',1, 'Un
 classique indémodable',true),
 (1290821,'Shelter','/u071a2uGEgC5lAMskhxdASwfQSt.jpg', 2026, 107, "Lors d'une dernière
 mission éprouvante pendant sa formation de Ranger, un ingénieur militaire doit mener son

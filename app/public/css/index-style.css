@@ -35,13 +35,17 @@
 .movies-card {
     display: flex;
     flex-direction: column;
-    align-items: center;    
+    align-items: center; 
+    gap: 20px;
+    
 }
-.movie-link{
-    text-decoration:none;
-    color:inherit;
+.movie-link {
+    text-decoration: none;
+    color: inherit;
     display:block;
-}
+    margin: 0;
+    padding: 0;
+} 
 .movie-card {
     background-color: var(--noirCard);
     border-radius: 12px;
@@ -157,9 +161,9 @@ h3 {
     
     .categories-list ul {
         flex-direction: row;
+        flex-wrap: wrap;
         gap: 10px;  
         overflow-x:hidden;
-        white-space:nowrap;
         padding:0 15px;
     }
 

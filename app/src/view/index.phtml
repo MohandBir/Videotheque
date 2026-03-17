@@ -20,7 +20,9 @@ ob_start();
             </form>     
         </div>
         <?php if (!empty($films)) {?>
-            
+
+           
+
             <div class="movies-card">
                 <?php foreach ($films as $film) {?>
                 
@@ -45,16 +47,20 @@ ob_start();
                 </a>
                 
                 <?php } ?>
-                    <?php if (isset($message)) { ?>
-                        <div class="invitation"><p><?= $message ?></p></div>
-                    <?php }?>
+
+            </div>
+
+        <?php } elseif (isset($message)) {?>
+
+            <div class="invitation">
+                <p><?= $message ?></p>
             </div>
 
         <?php } else {?>
 
             <div class="invitation">
                 <p class="invitation-emoji">🚫</p>
-                <p> Votre collection est vide!</p>
+                <p> <?= $message ?></p>
             </div>
 
         <?php } ?>

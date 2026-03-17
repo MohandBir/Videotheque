@@ -14,32 +14,37 @@ ob_start();
         </div>
         <?php if (!empty($films['results'])) {?>
             
-            <div class="movies-card">
-                <?php foreach ($films['results'] as $film) {?>
+        <div class="movies-card">
+            <?php foreach ($films['results'] as $film) {?>
+                <div class="movie-card">
                     <a href="?route=showTmdb&id=<?= $film['id'] ?>&genreId=<?= $film['genre_ids'][0] ?>" class="movie-link" >
-                        <div class="movie-card">
-                            <div class="poster-img">
-                                <?php if ($film['backdrop_path']) { ?>
-                                <img src="https://image.tmdb.org/t/p/w1280<?= $film['backdrop_path'] ?>" alt="Poster film">
-                                <?php } else { ?>
-                                <div class="empty-path"><span >🎥</span></div>
-                                <?php } ?>
-                            </div>
-                            <div class="down-card">
-                                <h3><?php echo htmlspecialchars(substr($film['title'],0,16)); echo (mb_strlen($film['title'])>16) ? '...': ''; ?></h3>
-                                <div class="bottom-card">
-                                    <div class="span1"><span>📆 <?= htmlspecialchars(substr($film['release_date'],0,4)) ?></span></div>
-                                    <div class="span1"><span>➕</span></div>
-                                </div>
-
-                            </div>
+                        <div class="poster-img">
+                            <?php if ($film['backdrop_path']) { ?>
+                            <img src="https://image.tmdb.org/t/p/w1280<?= $film['backdrop_path'] ?>" alt="Poster film">
+                            <?php } else { ?>
+                            <div class="empty-path"><span >🎥</span></div>
+                            <?php } ?>
                         </div>
                     </a>
-                <?php } ?>
 
-            </div>
+                    <div class="down-card">
+                        <a href="?route=showTmdb&id=<?= $film['id'] ?>&genreId=<?= $film['genre_ids'][0] ?>" class="movie-link" >                           
+                            <h3><?php echo htmlspecialchars(substr($film['title'],0,16)); echo (mb_strlen($film['title'])>16) ? '...': ''; ?></h3>
+                        </a>   
+                        <div class="bottom-card">
+                            <div class="span1"><span>📆 <?= htmlspecialchars(substr($film['release_date'],0,4)) ?></span></div>
+                            <a href="?route=add&id=<?= $film['id'] ?>" class="movie-link" >
+                                <div class="span1"><span>➕</span></div>
+                            </a>
+                        </div>
 
-        <?php } else {?>
+                    </div>
+                </div>
+            <?php } ?>
+
+        </div>
+
+        <?php } elseif (empty($films['results']) && !empty($_POST))  {?>
 
             <div class="invitation">
                 <p class="invitation-emoji">🚫</p>

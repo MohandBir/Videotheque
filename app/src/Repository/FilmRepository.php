@@ -81,8 +81,34 @@ class FilmRepository extends Repository
             'id' => $film->getId(),
             ]);
 
-        header('location: index.php?route=show&id='.$film->getId().'&genreId='.$film->getGenre_id().'&success=1');
-        exit;
+    }
+
+    public function add($film)
+    {
+        $sql = "INSERT INTO film( tmdb_id, title, poster_path, release_date, runtime, overview, genre_id) 
+        VALUES 
+        (:tmdb_id, :title, :poster_path, :release_date, :runtime, :overview, :genre_id)";
+        $request = $this->pdo->prepare($sql);
+        $request->execute([
+            'tmdb_id' => $film->getTmdb_id(),
+            'title' => $film->getTitle(),
+            'poster_path' => $film->getPoster_path(),
+            'release_date' => $film->getRelease_date(),
+            'runtime' => $film->getRuntime(),
+            'overview' => $film->getOverview(),
+            'genre_id' => $film->getGenre_id(),
+        ]);
+    }
+
+    public function fintByTmdbId($id) 
+    {
+        $sql = "SELECT * FROM film WHERE tmdb_id=:tmdbId";
+        $request = $this->pdo->prepare($sql);
+        $request->execute(['tmdbId' => $id]);
+        $request->setFetchMode(PDO::FETCH_CLASS, Film::class);
+        $film = $request->fetch();
+
+        return $film;
     }
 
 

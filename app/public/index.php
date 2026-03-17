@@ -31,4 +31,6 @@ if ($route === 'index') {
    $tmdb->search();
 } elseif ($route === 'showTmdb') {
    $tmdb->show();
+} elseif ($route === 'add') {
+   $tmdb->add();
 }
